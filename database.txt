@@ -1,0 +1,1323 @@
+create database otndb;
+use otndb;
+
+
+create table prodTable (prodID int, prodName varchar(128), description varchar(1024),
+price int, figURL varchar(512), releaseDate date, calory int, protein float(3,1),
+lipid float(3,1), carbonhydrates float(4,1), sugar(4,1), fiber float(2,1), scequiv float(2,1),
+primary key (prodID)
+);
+
+create table prodsympTable (prodsympID int, prodID int, sympton varchar(32),
+primary key (prodsympID),
+foreign key (prodID) references prodTable (prodID));
+
+create table keyTable (keyID int, keyword varchar(32), primary key (keyID));
+
+create table sympTable (sympID int, sympton varchar(32), primary key (sympID));
+
+create table regionTable (regionID int, region varchar(16), primary key (regionID));
+
+create table allergyTable (allergyID int, allergy varchar(16), primary key (allergyID));
+
+create table sympkeyTable (sympkeyID int, sympID int, keyID int, primary key (sympkeyID),
+foreign key (sympID) references sympTable (sympID),
+foreign key (keyID) references keyTable (keyID));
+
+create table prodkeyTable (prodkeyID int, prodID int, keyID int, primary key (prodkeyID),
+foreign key (prodID) references prodTable (prodID),
+foreign key (keyID) references keyTable (keyID));
+
+create table prodregionTable (prodregionID int, prodID int, regionID int, primary key (prodregionID),
+foreign key (prodID) references prodTable (prodID),
+foreign key (regionID) references regionTable (regionID));
+
+create table prodallergyTable (prodallergyID int, prodID int, allergyID int, primary key (prodallergyID),
+foreign key (prodID) references prodTable (prodID),
+foreign key (allergyID) references allergyTable (allergyID));
+
+
+insert into prodTable
+values (1, 'もち麦もっちり 茨城県産小松菜とわかめ御飯', 'もち麦入りのだし飯に、わかめと茨城県産の小松菜を混ぜ込んだ、食感の良いおむすびです。',
+115, 'https://img.7api-01.dp1.sej.co.jp/item-image/043301/7539E116CBA232A2A066D2E1F7CDA944.jpg', '2021-10-19',
+148, 4.7, 1.2, 32, 27.2, 4.8, 1.5);
+
+insert into prodTable
+values (2, 'チーズたっぷり海老グラタン', 'パンやワインと合わせても美味しい、チーズ風味豊かな海老グラタンです。',
+398, 'https://img.7api-01.dp1.sej.co.jp/item-image/090082/34F3F3D1C25D17B2F32583D20D76DB40.jpg', NULL,
+405, 20, 20, 37.9, 34.7, 3.2, 2.6);
+
+insert into prodTable
+values (3, '7プレミアム レアチーズミルクレープ', '「Kiri」クリームチーズを配合。しっとり焼き上げた自家製のクレープ生地と、レアチーズクリームを重ねたミルクレープです。',
+278, 'https://img.7api-01.dp1.sej.co.jp/item-image/110487/BE680C681C69F40F167F34A0E33ACDC2.jpg', NULL,
+321, 5.7, 21.9, 25.5, 25.1, 0.4, 0.4);
+
+insert into prodTable
+values (4, '手巻おにぎり 鰹の香り引き立つ おかか', '本枯節を贅沢に使用したおかかを中具にした、かつお節の旨みと香りを味わえるおむすびです。',
+105, 'https://img.7api-01.dp1.sej.co.jp/item-image/043328/A7CF09D3E8E2BA5B1C0E0C20B55A93A4.jpg', '2021-10-21',
+166, 4.5, 0.9, 35.7, 34, 1.7, 1.3);
+
+insert into prodTable
+values (5, '7プレミアム 半熟煮たまご2個入', 'こだわりの専用卵を使用し、すっきりとした後味の醤油と、風味の良いかつおだしで味付けした煮たまごです。黄身はとろっと、白身は柔らかく仕上げ、ラーメンなどの具材はもちろん、そのままおつまみにしてもお楽しみいただけます。',
+150, 'https://img.7api-01.dp1.sej.co.jp/item-image/104578/3F0E21609F9C4E68D224D9EA0C2D1A5A.jpg', NULL,
+76, 7.4, 4.5, 1.6, 1.4, 0.2, 0.6);
+
+insert into prodTable
+values (6, 'たんぱく質が摂れる 鶏むね肉のサラダ', 'たんぱく質摂取ニーズが高まる中で、1食で1／3日分以上のたんぱく質27ｇが摂れる仕立てです。更に高たんぱく低糖質の食事サラダとなっております。',
+398, 'https://img.7api-01.dp1.sej.co.jp/item-image/103306/9EA50F97BD2196D4C5D088C8DF8BD4CE.jpg', NULL,
+255, 27.4, 12.2, 2, 0.7, 1.3, 2.9);
+
+insert into prodTable
+values (7, '7プレミアム ゼスプリグリーンキウイ', '市場でも人気の「ゼスプリキウイ」と「7プレミアム」のダブルネーム商品。酸味が少なく甘みの強さが特長。',
+178, 'https://img.7api-01.dp1.sej.co.jp/item-image/252595/9AA9C5784CE6C16CA4CCB8B3A09901A9.jpg', NULL,
+37, 0.6, 0.4, 9.3, 7.7, 1.6, 0);
+
+insert into prodTable
+values (8, 'お好み幕の内', '人気のおかずをいろいろ盛り込んだ定番の幕の内弁当',
+430, 'https://img.7api-01.dp1.sej.co.jp/item-image/041757/262622455BD15F5D78896D1FB03EC0C6.jpg', NULL,
+733, 27.3, 28, 95.3, 90.6, 4.7, 3.1);
+
+insert into prodTable
+values (9, '7プレミアム すっぱい干し梅', '梅本来の味がお楽しみいただけます。',
+148, 'https://img.7api-01.dp1.sej.co.jp/item-image/322722/2F0F184A570966CE0AE8C2E45C3DBF50.jpg', NULL,
+30, 0.7, 0, 8.2, 5.6, 2.6, 2.7);
+
+insert into prodTable
+values (10, '7プレミアム ナッツ＆フルーツ', 'レーズン、カシューナッツ、アーモンド、パイナップル、クランベリーの5点をバランスよくミックスしました。油・食塩無添加の素焼きナッツを使用しています',
+198, 'https://img.7api-01.dp1.sej.co.jp/item-image/321975/6220F3D3A592803097E6D73C9668BAF9.jpg', NULL,
+301, 6.2, 11.7, 44.6, 40.7, 3.9, 0.1);
+
+insert into prodTable
+values (11, '新潟県産コシヒカリおむすび 熟成いくら', '人気の銘柄米である新潟県産コシヒカリで炊き上げた御飯に、1晩熟成した醤油漬けのいくらを組み合わせたおむすびです。',
+190, 'https://img.7api-01.dp1.sej.co.jp/item-image/042240/11B318658EDE9EF80D0F7373970A144B.jpg', NULL,
+180, 4.2, 1.3, 38.5, 37, 1.5, 1.2);
+
+insert into prodTable
+values (12, '7プレミアム ブルーベリーバターブレッド 2枚入', 'ブルーベリーを使用したフィリングにバターを合わせたミニ食パンです。',
+108, 'https://img.7api-01.dp1.sej.co.jp/item-image/290118/299717BF028240D2D76100411767A8A8.jpg', NULL,
+119, 3.4, 1.7, 23.1, 21.9, 1.2, 0.4);
+
+insert into prodTable
+values (13, '7プレミアム 牛乳寒天 3個パック', 'つるっとしたのど越しの、牛乳のコクとやさしい甘みの寒天です',
+158, 'https://img.7api-01.dp1.sej.co.jp/item-image/251949/B6658D9D5DFBFE214574D38C7F7E792B.jpg', NULL,
+78, 1.5, 2.4, 12.6, NULL, NULL, 0.1);
+
+insert into prodTable
+values (14, '7プレミアム カップみそ汁 しじみ', '丁寧に熟成発酵させた「小分け熟成味噌」を使用し、香り高くコク深い味わいが特長の殻付きしじみのおみそ汁です。しじみ100個分のオルニチンを配合しています。',
+138, 'https://img.7api-01.dp1.sej.co.jp/item-image/341578/ED4920F67B6611379BB53B5F78B28607.jpg', NULL,
+31, 2.7, 0.9, 3.4, 2.8, 0.6, 2);
+
+insert into prodTable
+values (15, '7プレミアム ココア スティック 5P', '簡便性の高い、スティックタイプのココアです',
+198, 'https://img.7api-01.dp1.sej.co.jp/item-image/370234/195248ED5974DE07BF12A378DDD559E1.jpg', NULL,
+66, 1.1, 1.6, 12.4, 11, 1.4, 0.3);
+
+insert into prodTable
+values (16, 'ごま大福', '「すりごま」をまぶした大福です。つぶつぶとした食感や風味を楽しめる発芽玄米を使用した大福生地で、ほんのりと塩味の効いた塩こしあんを包みました',
+128, 'https://img.7api-01.dp1.sej.co.jp/item-image/111758/74752C1871609C658AAED5ABE138A540.jpg', '2021-10-20',
+122, 2.9, 1.4, 25.1, 23.8, 1.3, 0.3);
+
+insert into prodTable
+values (17, '7プレミアム 豆とひじきのサラダ', 'ゆずやだし汁が香る和風ドレッシングでさっぱりと仕立てた、具だくさんの和風サラダです。豆やひじき、押麦など9種類の具材を合わせました。',
+128, 'https://img.7api-01.dp1.sej.co.jp/item-image/103987/BB39668CA3702CECBCE08DB2E16C7E15.jpg', NULL,
+64, 4.9, 1.8, 8.8, 5.4, 3.4, 1.4);
+
+insert into prodTable
+values (18, '7プレミアム アーモンドフィッシュ', '素材を活かしたカルシウム豊富なアーモンドフィッシュ',
+100, 'https://img.7api-01.dp1.sej.co.jp/item-image/380126/2AFEAFACA422C04911FC635C18334DFD.jpg', NULL,
+107, 7.2, 6.7, 4.3, NULL, NULL, 0.4);
+
+insert into prodTable
+values (19, '焼おにぎりの出汁茶漬け(鮭)', '一番出汁と食べる焼きおにぎり茶漬けです。',
+278, 'https://img.7api-01.dp1.sej.co.jp/item-image/043256/C752ECE0E355757F675BD23D6DB095D2.jpg', NULL,
+232, 8.6, 1.3, 48.1, 44.9, 3.2, 2.7);
+
+insert into prodTable
+values (20, 'シーザーサラダサンド', '全粒粉食パンを使用し、チキン，野菜，たまごを組み合わせ、シーザーソースで食べるサラダ感覚のサンドイッチです。',
+340, 'https://img.7api-01.dp1.sej.co.jp/item-image/051007/89E1D91FA25DDCB4378414ABED3EFA09.jpg', NULL,
+216, 16.3, 7.8, 21.5, 18.8, 2.7, 1.8);
+
+insert into prodTable
+values (21, '7プレミアム カップみそ汁 7種の野菜', '7種類の野菜を使用した、具材たっぷりのみそ汁です。3種類の米みそを使用し、鰹節，煮干し，昆布の3種のだしを利かせた、コクのある味わいです。',
+119, 'https://img.7api-01.dp1.sej.co.jp/item-image/340440/2EF54A86FF0B73428168E1CDA24C8838.jpg', NULL,
+47, 3.2, 0.9, 7.3, 5.4, 1.9, 2.2);
+
+insert into prodTable
+values (22, '7プレミアム やさしい甘さのはちみつ梅', '梅をはちみつでやさしい甘さに仕上げました。',
+148, 'https://img.7api-01.dp1.sej.co.jp/item-image/322721/1F6E9EEED205B37600EEBADD3967696F.jpg', NULL,
+44, 0.4, 0.2, 12.5, 7.9, 4.6, 2.9);
+
+insert into prodTable
+values (23, '7プレミアム くちどけいちご', '凍っているのにやわらかい食感のいちごです。',
+158, 'https://img.7api-01.dp1.sej.co.jp/item-image/410257/40A4A99A02CD8BED1AC1579D2CB91890.jpg', NULL,
+49, 0.4, 0.1, 11.7, 10.6, 1.1, 0);
+
+insert into prodTable
+values (24, '7プレミアム しろもちたい焼き', 'もちもちとした食感のたい焼き生地に卵を配合し、生地もおいしいたい焼きに。中にはバニラシーズを練りこんだカスタード風味のクリームが包まれています。',
+128, 'https://img.7api-01.dp1.sej.co.jp/item-image/113351/349475207E87C0A9563147B52F49C21B.jpg', NULL,
+230, 1.2, 9.8, 34, 34, 0, 0.2);
+
+insert into prodsympTable
+values (1, 1, '睡眠不足');
+
+insert into prodsympTable
+values (2, 2, '睡眠不足');
+
+insert into prodsympTable
+values (3, 3, '睡眠不足');
+
+insert into prodsympTable
+values (4, 4, '運動不足');
+
+insert into prodsympTable
+values (5, 5, '運動不足');
+
+insert into prodsympTable
+values (6, 6, '運動不足');
+
+insert into prodsympTable
+values (7, 7, '慢性的疲労');
+
+insert into prodsympTable
+values (8, 8, '慢性的疲労');
+
+insert into prodsympTable
+values (9, 9, '慢性的疲労');
+
+insert into prodsympTable
+values (10, 10, '眼精疲労');
+
+insert into prodsympTable
+values (11, 11, '眼精疲労');
+
+insert into prodsympTable
+values (12, 12, '眼精疲労');
+
+insert into prodsympTable
+values (13, 13, '集中力低下，頭痛');
+
+insert into prodsympTable
+values (14, 14, '集中力低下，頭痛');
+
+insert into prodsympTable
+values (15, 15, '集中力低下，頭痛');
+
+insert into prodsympTable
+values (16, 16, '腰痛，肩こり');
+
+insert into prodsympTable
+values (17, 17, '腰痛，肩こり');
+
+insert into prodsympTable
+values (18, 18, '腰痛，肩こり');
+
+insert into prodsympTable
+values (19, 19, '免疫低下');
+
+insert into prodsympTable
+values (20, 20, '免疫低下');
+
+insert into prodsympTable
+values (21, 21, '免疫低下');
+
+insert into prodsympTable
+values (22, 22, '過度なストレス状態');
+
+insert into prodsympTable
+values (23, 23, '過度なストレス状態');
+
+insert into prodsympTable
+values (24, 24, '過度なストレス状態');
+
+insert into keyTable
+values (1, 'おにぎり');
+
+insert into keyTable
+values (2, 'わかめ');
+
+insert into keyTable
+values (3, 'チーズ');
+
+insert into keyTable
+values (4, 'えび');
+
+insert into keyTable
+values (5, '牛乳');
+
+insert into keyTable
+values (6, '鰹');
+
+insert into keyTable
+values (7, '卵');
+
+insert into keyTable
+values (9, 'キウイフルーツ');
+
+insert into keyTable
+values (10, '鶏肉');
+
+insert into keyTable
+values (11, '梅干し');
+
+insert into keyTable
+values (12, 'レーズン');
+
+insert into keyTable
+values (13, 'いくら');
+
+insert into keyTable
+values (14, 'ブルーベリー');
+
+insert into keyTable
+values (15, 'しじみ');
+
+insert into keyTable
+values (16, '味噌汁');
+
+insert into keyTable
+values (17, 'ココア');
+
+insert into keyTable
+values (18, 'ごま');
+
+insert into keyTable
+values (19, '大豆');
+
+insert into keyTable
+values (20, 'ひじき');
+
+insert into keyTable
+values (21, '鰯');
+
+insert into keyTable
+values (22, 'アーモンド');
+
+insert into keyTable
+values (23, '鮭');
+
+insert into keyTable
+values (24, 'サンドイッチ');
+
+insert into keyTable
+values (25, 'はちみつ');
+
+insert into keyTable
+values (26, 'いちご');
+
+insert into sympTable
+values (1, '睡眠不足');
+
+insert into sympTable
+values (2, '運動不足');
+
+insert into sympTable
+values (3, '慢性的疲労');
+
+insert into sympTable
+values (4, '眼精疲労');
+
+insert into sympTable
+values (5, '集中力低下，頭痛');
+
+insert into sympTable
+values (6, '腰痛，肩こり');
+
+insert into sympTable
+values (7, '免疫低下');
+
+insert into sympTable
+values (8, '過度なストレス状態');
+
+insert into regionTable
+values (1, '茨城県');
+
+insert into regionTable
+values (2, '東北');
+
+insert into regionTable
+values (3, '関東');
+
+insert into regionTable
+values (4, '甲信越');
+
+insert into regionTable
+values (5, '北陸');
+
+insert into regionTable
+values (6, '東海');
+
+insert into regionTable
+values (7, '近畿');
+
+insert into regionTable
+values (8, '中国');
+
+insert into regionTable
+values (9, '四国');
+
+insert into regionTable
+values (10, '九州');
+
+insert into regionTable
+values (11, '北海道');
+
+insert into regionTable
+values (12, '福島県');
+
+insert into regionTable
+values (13, '東京都');
+
+insert into regionTable
+values (14, '神奈川県');
+
+insert into regionTable
+values (15, '静岡県');
+
+insert into regionTable
+values (16, '埼玉県');
+
+insert into regionTable
+values (17, '千葉県');
+
+insert into regionTable
+values (18, '新潟県');
+
+insert into regionTable
+values (19, '山梨県');
+
+insert into allergyTable
+values (1, '小麦');
+
+insert into allergyTable
+values (2, '卵');
+
+insert into allergyTable
+values (3, '乳');
+
+insert into allergyTable
+values (4, 'えび');
+
+insert into sympkeyTable
+values (1, 1, 1);
+
+insert into sympkeyTable
+values (2, 1, 2);
+
+insert into sympkeyTable
+values (3, 1, 3);
+
+insert into sympkeyTable
+values (4, 1, 4);
+
+insert into sympkeyTable
+values (5, 1, 5);
+
+insert into sympkeyTable
+values (6, 2, 1);
+
+insert into sympkeyTable
+values (7, 2, 6);
+
+insert into sympkeyTable
+values (8, 2, 7);
+
+insert into sympkeyTable
+values (9, 2, 10);
+
+insert into sympkeyTable
+values (10, 3, 9);
+
+insert into sympkeyTable
+values (11, 3, 7);
+
+insert into sympkeyTable
+values (12, 3, 10);
+
+insert into sympkeyTable
+values (13, 3, 11);
+
+insert into sympkeyTable
+values (14, 4, 12);
+
+insert into sympkeyTable
+values (15, 4, 13);
+
+insert into sympkeyTable
+values (16, 4, 14);
+
+insert into sympkeyTable
+values (17, 5, 5);
+
+insert into sympkeyTable
+values (18, 5, 15);
+
+insert into sympkeyTable
+values (19, 5, 16);
+
+insert into sympkeyTable
+values (20, 5, 17);
+
+insert into sympkeyTable
+values (21, 6, 18);
+
+insert into sympkeyTable
+values (22, 6, 19);
+
+insert into sympkeyTable
+values (23, 6, 20);
+
+insert into sympkeyTable
+values (24, 6, 21);
+
+insert into sympkeyTable
+values (25, 6, 22);
+
+insert into sympkeyTable
+values (26, 7, 23);
+
+insert into sympkeyTable
+values (27, 7, 24);
+
+insert into sympkeyTable
+values (28, 7, 16);
+
+insert into sympkeyTable
+values (29, 8, 25);
+
+insert into sympkeyTable
+values (30, 8, 26);
+
+insert into sympkeyTable
+values (31, 8, 5);
+
+insert into sympkeyTable
+values (32, 1, 23);
+
+insert into sympkeyTable
+values (33, 2, 23);
+
+insert into sympkeyTable
+values (34, 8, 23);
+
+insert into sympkeyTable
+values (35, 7, 4);
+
+insert into sympkeyTable
+values (36, 8, 4);
+
+insert into sympkeyTable
+values (37, 6, 5);
+
+insert into sympkeyTable
+values (38, 7, 5);
+
+insert into sympkeyTable
+values (39, 8, 9);
+
+insert into sympkeyTable
+values (40, 8, 17);
+
+insert into sympkeyTable
+values (41, 1, 20);
+
+insert into sympkeyTable
+values (42, 8, 20);
+
+insert into sympkeyTable
+values (43, 1, 19);
+
+insert into sympkeyTable
+values (44, 2, 19);
+
+insert into sympkeyTable
+values (45, 5, 19);
+
+insert into sympkeyTable
+values (46, 8, 19);
+
+insert into sympkeyTable
+values (47, 6, 26);
+
+insert into sympkeyTable
+values (48, 1, 24);
+
+insert into sympkeyTable
+values (49, 8, 13);
+
+insert into prodkeyTable
+values (1, 1, 1);
+
+insert into prodkeyTable
+values (2, 1, 2);
+
+insert into prodkeyTable
+values (3, 2, 3);
+
+insert into prodkeyTable
+values (4, 2, 4);
+
+insert into prodkeyTable
+values (5, 3, 3);
+
+insert into prodkeyTable
+values (6, 3, 5);
+
+insert into prodkeyTable
+values (7, 4, 1);
+
+insert into prodkeyTable
+values (8, 4, 6);
+
+insert into prodkeyTable
+values (9, 5, 7);
+
+insert into prodkeyTable
+values (10, 6, 7);
+
+insert into prodkeyTable
+values (11, 6, 10);
+
+insert into prodkeyTable
+values (12, 7, 9);
+
+insert into prodkeyTable
+values (13, 8, 7);
+
+insert into prodkeyTable
+values (14, 8, 10);
+
+insert into prodkeyTable
+values (15, 9, 11);
+
+insert into prodkeyTable
+values (16, 10, 12);
+
+insert into prodkeyTable
+values (17, 11, 1);
+
+insert into prodkeyTable
+values (18, 11, 13);
+
+insert into prodkeyTable
+values (19, 12, 14);
+
+insert into prodkeyTable
+values (20, 13, 5);
+
+insert into prodkeyTable
+values (21, 14, 15);
+
+insert into prodkeyTable
+values (22, 14, 16);
+
+insert into prodkeyTable
+values (23, 15, 17);
+
+insert into prodkeyTable
+values (24, 16, 18);
+
+insert into prodkeyTable
+values (25, 17, 19);
+
+insert into prodkeyTable
+values (26, 17, 20);
+
+insert into prodkeyTable
+values (27, 18, 21);
+
+insert into prodkeyTable
+values (28, 18, 22);
+
+insert into prodkeyTable
+values (29, 19, 1);
+
+insert into prodkeyTable
+values (30, 19, 23);
+
+insert into prodkeyTable
+values (31, 20, 24);
+
+insert into prodkeyTable
+values (32, 21, 16);
+
+insert into prodkeyTable
+values (33, 22, 25);
+
+insert into prodkeyTable
+values (34, 23, 26);
+
+insert into prodkeyTable
+values (35, 24, 5);
+
+insert into prodregionTable
+values (1, 1, 1);
+
+insert into prodregionTable
+values (2, 2, 2);
+
+insert into prodregionTable
+values (3, 2, 3);
+
+insert into prodregionTable
+values (4, 2, 4);
+
+insert into prodregionTable
+values (5, 2, 5);
+
+insert into prodregionTable
+values (6, 2, 6);
+
+insert into prodregionTable
+values (7, 2, 7);
+
+insert into prodregionTable
+values (8, 2, 8);
+
+insert into prodregionTable
+values (9, 2, 9);
+
+insert into prodregionTable
+values (10, 2, 10);
+
+insert into prodregionTable
+values (11, 3, 2);
+
+insert into prodregionTable
+values (12, 3, 3);
+
+insert into prodregionTable
+values (13, 3, 4);
+
+insert into prodregionTable
+values (14, 3, 5);
+
+insert into prodregionTable
+values (15, 3, 6);
+
+insert into prodregionTable
+values (16, 3, 7);
+
+insert into prodregionTable
+values (17, 3, 8);
+
+insert into prodregionTable
+values (18, 3, 9);
+
+insert into prodregionTable
+values (19, 3, 10);
+
+insert into prodregionTable
+values (20, 4, 3);
+
+insert into prodregionTable
+values (21, 4, 11);
+
+insert into prodregionTable
+values (22, 4, 12);
+
+insert into prodregionTable
+values (23, 5, 2);
+
+insert into prodregionTable
+values (24, 5, 3);
+
+insert into prodregionTable
+values (25, 5, 4);
+
+insert into prodregionTable
+values (26, 5, 5);
+
+insert into prodregionTable
+values (27, 5, 6);
+
+insert into prodregionTable
+values (28, 5, 7);
+
+insert into prodregionTable
+values (29, 5, 8);
+
+insert into prodregionTable
+values (30, 5, 9);
+
+insert into prodregionTable
+values (31, 5, 10);
+
+insert into prodregionTable
+values (32, 5, 11);
+
+insert into prodregionTable
+values (33, 6, 13);
+
+insert into prodregionTable
+values (34, 6, 14);
+
+insert into prodregionTable
+values (35, 7, 2);
+
+insert into prodregionTable
+values (36, 7, 3);
+
+insert into prodregionTable
+values (37, 7, 4);
+
+insert into prodregionTable
+values (38, 7, 5);
+
+insert into prodregionTable
+values (39, 7, 6);
+
+insert into prodregionTable
+values (40, 7, 7);
+
+insert into prodregionTable
+values (41, 7, 8);
+
+insert into prodregionTable
+values (42, 7, 9);
+
+insert into prodregionTable
+values (43, 7, 10);
+
+insert into prodregionTable
+values (44, 7, 11);
+
+insert into prodregionTable
+values (45, 8, 2);
+
+insert into prodregionTable
+values (46, 8, 3);
+
+insert into prodregionTable
+values (47, 8, 4);
+
+insert into prodregionTable
+values (48, 8, 5);
+
+insert into prodregionTable
+values (49, 8, 6);
+
+insert into prodregionTable
+values (50, 8, 11);
+
+insert into prodregionTable
+values (51, 9, 2);
+
+insert into prodregionTable
+values (52, 9, 3);
+
+insert into prodregionTable
+values (53, 9, 4);
+
+insert into prodregionTable
+values (54, 9, 5);
+
+insert into prodregionTable
+values (55, 9, 6);
+
+insert into prodregionTable
+values (56, 9, 7);
+
+insert into prodregionTable
+values (57, 9, 8);
+
+insert into prodregionTable
+values (58, 9, 9);
+
+insert into prodregionTable
+values (59, 9, 10);
+
+insert into prodregionTable
+values (60, 9, 11);
+
+insert into prodregionTable
+values (61, 10, 2);
+
+insert into prodregionTable
+values (62, 10, 3);
+
+insert into prodregionTable
+values (63, 10, 4);
+
+insert into prodregionTable
+values (64, 10, 5);
+
+insert into prodregionTable
+values (65, 10, 6);
+
+insert into prodregionTable
+values (66, 10, 7);
+
+insert into prodregionTable
+values (67, 10, 8);
+
+insert into prodregionTable
+values (68, 10, 9);
+
+insert into prodregionTable
+values (69, 10, 10);
+
+insert into prodregionTable
+values (70, 10, 11);
+
+insert into prodregionTable
+values (71, 11, 3);
+
+insert into prodregionTable
+values (72, 11, 15);
+
+insert into prodregionTable
+values (73, 12, 2);
+
+insert into prodregionTable
+values (74, 12, 3);
+
+insert into prodregionTable
+values (75, 12, 4);
+
+insert into prodregionTable
+values (76, 12, 5);
+
+insert into prodregionTable
+values (77, 12, 6);
+
+insert into prodregionTable
+values (78, 12, 7);
+
+insert into prodregionTable
+values (79, 12, 8);
+
+insert into prodregionTable
+values (80, 12, 9);
+
+insert into prodregionTable
+values (81, 13, 2);
+
+insert into prodregionTable
+values (82, 13, 3);
+
+insert into prodregionTable
+values (83, 13, 4);
+
+insert into prodregionTable
+values (84, 13, 5);
+
+insert into prodregionTable
+values (85, 13, 6);
+
+insert into prodregionTable
+values (86, 13, 7);
+
+insert into prodregionTable
+values (87, 13, 8);
+
+insert into prodregionTable
+values (88, 13, 9);
+
+insert into prodregionTable
+values (89, 13, 10);
+
+insert into prodregionTable
+values (90, 13, 11);
+
+insert into prodregionTable
+values (91, 14, 2);
+
+insert into prodregionTable
+values (92, 14, 3);
+
+insert into prodregionTable
+values (93, 14, 4);
+
+insert into prodregionTable
+values (94, 14, 5);
+
+insert into prodregionTable
+values (95, 14, 6);
+
+insert into prodregionTable
+values (96, 14, 7);
+
+insert into prodregionTable
+values (97, 14, 8);
+
+insert into prodregionTable
+values (98, 14, 9);
+
+insert into prodregionTable
+values (99, 14, 10);
+
+insert into prodregionTable
+values (100, 14, 11);
+
+insert into prodregionTable
+values (101, 15, 2);
+
+insert into prodregionTable
+values (102, 15, 3);
+
+insert into prodregionTable
+values (103, 15, 4);
+
+insert into prodregionTable
+values (104, 15, 5);
+
+insert into prodregionTable
+values (105, 15, 6);
+
+insert into prodregionTable
+values (106, 15, 7);
+
+insert into prodregionTable
+values (107, 15, 8);
+
+insert into prodregionTable
+values (108, 15, 9);
+
+insert into prodregionTable
+values (109, 15, 10);
+
+insert into prodregionTable
+values (110, 15, 11);
+
+insert into prodregionTable
+values (111, 16, 3);
+
+insert into prodregionTable
+values (112, 16, 4);
+
+insert into prodregionTable
+values (113, 16, 5);
+
+insert into prodregionTable
+values (114, 16, 6);
+
+insert into prodregionTable
+values (115, 16, 7);
+
+insert into prodregionTable
+values (116, 16, 8);
+
+insert into prodregionTable
+values (117, 16, 9);
+
+insert into prodregionTable
+values (118, 16, 10);
+
+insert into prodregionTable
+values (119, 17, 2);
+
+insert into prodregionTable
+values (120, 17, 3);
+
+insert into prodregionTable
+values (121, 17, 4);
+
+insert into prodregionTable
+values (122, 17, 5);
+
+insert into prodregionTable
+values (123, 17, 6);
+
+insert into prodregionTable
+values (124, 17, 7);
+
+insert into prodregionTable
+values (125, 17, 8);
+
+insert into prodregionTable
+values (126, 17, 9);
+
+insert into prodregionTable
+values (127, 17, 10);
+
+insert into prodregionTable
+values (128, 17, 11);
+
+insert into prodregionTable
+values (129, 18, 2);
+
+insert into prodregionTable
+values (130, 18, 3);
+
+insert into prodregionTable
+values (131, 18, 4);
+
+insert into prodregionTable
+values (132, 18, 5);
+
+insert into prodregionTable
+values (133, 18, 6);
+
+insert into prodregionTable
+values (134, 18, 7);
+
+insert into prodregionTable
+values (135, 18, 8);
+
+insert into prodregionTable
+values (136, 18, 9);
+
+insert into prodregionTable
+values (137, 18, 10);
+
+insert into prodregionTable
+values (138, 18, 11);
+
+insert into prodregionTable
+values (139, 19, 13);
+
+insert into prodregionTable
+values (140, 19, 14);
+
+insert into prodregionTable
+values (141, 19, 16);
+
+insert into prodregionTable
+values (142, 19, 17);
+
+insert into prodregionTable
+values (143, 20, 13);
+
+insert into prodregionTable
+values (144, 20, 14);
+
+insert into prodregionTable
+values (145, 20, 16);
+
+insert into prodregionTable
+values (146, 20, 17);
+
+insert into prodregionTable
+values (147, 21, 2);
+
+insert into prodregionTable
+values (148, 21, 3);
+
+insert into prodregionTable
+values (149, 21, 4);
+
+insert into prodregionTable
+values (150, 21, 5);
+
+insert into prodregionTable
+values (151, 21, 6);
+
+insert into prodregionTable
+values (152, 21, 7);
+
+insert into prodregionTable
+values (153, 21, 8);
+
+insert into prodregionTable
+values (154, 21, 9);
+
+insert into prodregionTable
+values (155, 21, 10);
+
+insert into prodregionTable
+values (156, 21, 11);
+
+insert into prodregionTable
+values (157, 22, 2);
+
+insert into prodregionTable
+values (158, 22, 3);
+
+insert into prodregionTable
+values (159, 22, 4);
+
+insert into prodregionTable
+values (160, 22, 5);
+
+insert into prodregionTable
+values (161, 22, 6);
+
+insert into prodregionTable
+values (162, 22, 7);
+
+insert into prodregionTable
+values (163, 22, 8);
+
+insert into prodregionTable
+values (164, 22, 9);
+
+insert into prodregionTable
+values (165, 22, 10);
+
+insert into prodregionTable
+values (166, 22, 11);
+
+insert into prodregionTable
+values (167, 23, 2);
+
+insert into prodregionTable
+values (168, 23, 3);
+
+insert into prodregionTable
+values (169, 23, 4);
+
+insert into prodregionTable
+values (170, 23, 5);
+
+insert into prodregionTable
+values (171, 23, 6);
+
+insert into prodregionTable
+values (172, 23, 7);
+
+insert into prodregionTable
+values (173, 23, 8);
+
+insert into prodregionTable
+values (174, 23, 9);
+
+insert into prodregionTable
+values (175, 23, 10);
+
+insert into prodregionTable
+values (176, 23, 11);
+
+insert into prodregionTable
+values (177, 24, 3);
+
+insert into prodregionTable
+values (178, 24, 15);
+
+insert into prodregionTable
+values (179, 24, 18);
+
+insert into prodregionTable
+values (180, 24, 19);
+
+insert into prodallergyTable
+values (1, 1, 1);
+
+insert into prodallergyTable
+values (2, 2, 1);
+
+insert into prodallergyTable
+values (3, 2, 2);
+
+insert into prodallergyTable
+values (4, 2, 3);
+
+insert into prodallergyTable
+values (5, 2, 4);
+
+insert into prodallergyTable
+values (6, 3, 1);
+
+insert into prodallergyTable
+values (7, 3, 2);
+
+insert into prodallergyTable
+values (8, 3, 3);
+
+insert into prodallergyTable
+values (9, 4, 1);
+
+insert into prodallergyTable
+values (10, 5, 1);
+
+insert into prodallergyTable
+values (11, 5, 2);
+
+insert into prodallergyTable
+values (12, 6, 1);
+
+insert into prodallergyTable
+values (13, 6, 2);
+
+insert into prodallergyTable
+values (14, 6, 3);
+
+insert into prodallergyTable
+values (15, 8, 1);
+
+insert into prodallergyTable
+values (16, 8, 2);
+
+insert into prodallergyTable
+values (17, 8, 3);
+
+insert into prodallergyTable
+values (18, 11, 1);
+
+insert into prodallergyTable
+values (19, 12, 1);
+
+insert into prodallergyTable
+values (20, 12, 3);
+
+insert into prodallergyTable
+values (21, 13, 3);
+
+insert into prodallergyTable
+values (22, 15, 3);
+
+insert into prodallergyTable
+values (23, 17, 1);
+
+insert into prodallergyTable
+values (24, 18, 1);
+
+insert into prodallergyTable
+values (25, 19, 1);
+
+insert into prodallergyTable
+values (26, 20, 1);
+
+insert into prodallergyTable
+values (27, 20, 2);
+
+insert into prodallergyTable
+values (28, 20, 3);
+
+insert into prodallergyTable
+values (29, 24, 1);
+
+insert into prodallergyTable
+values (30, 24, 2);
+
+insert into prodallergyTable
+values (31, 24, 3);
+
+
+create view testView as
+select pt.prodID, pt.prodName, pt.description, pt.price, pt.figURL,
+pt.releaseDate, pt.calory, pt.protein, pt.lipid,  pt.carbonhydrates,
+pt.sugar, pt.fiber, pt.scequiv, pst.sympton
+from prodTable pt
+left outer join prodsympTable pst
+on pt.prodID = pst.prodID;
+
+create view prodView as
+select pt.prodID, pt.prodName, pt.description, pt.price, pt.figURL,
+pt.releaseDate, pt.calory, pt.protein, pt.lipid,  pt.carbonhydrates,
+pt.sugar, pt.fiber, pt.scequiv, rt.region, at.allergy
+from prodTable pt
+left outer join prodregionTable prt
+on pt.prodID = prt.prodID
+left outer join regionTable rt
+on prt.regionID=rt.regionID
+left outer join prodallergyTable pat
+on pt.prodID = pat.prodID
+left outer join allergyTable at
+on pat.allergyID = at.allergyID;
+
+create view prodsympView as
+select pv.prodID, pv.prodName, pv.description, pv.price, pv.figURL,
+pv.releaseDate, pv.calory, pv.protein, pv.lipid,  pv.carbonhydrates,
+pv.sugar, pv.fiber, pv.scequiv, pv.region, pv.allergy, st.sympton
+from prodView pv
+left outer join prodkeyTable pkt
+on pv.prodID = pkt.prodID
+left outer join keyTable kt
+on pkt.keyID=kt.keyID
+left outer join sympkeyTable skt
+on kt.keyID = skt.keyID
+left outer join sympTable st
+on skt.sympID = st.sympID;
+
+
+select * from prodsympview where sympton = '睡眠不足';

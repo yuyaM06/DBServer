@@ -1,0 +1,17 @@
+{
+  "prodID": "13",
+  "prodName": "７プレミアム 牛乳寒天 ３個パック",
+  "description": "つるっとしたのど越しの、牛乳のコクとや さしい甘みの寒天です",
+  "price": "158",
+  "figURL": "https://img.7api-01.dp1.sej.co.jp/item-image/251949/B6658D9D5DFBFE214574D38C7F7E792B.jpg",
+  "date": "NULL",
+  "calory": "78",
+  "protein": "1.5",
+  "lipid": "2.4",
+  "carbonhydrates": "12.6",
+  "sugar": "NULL",
+  "fiber": "NULL",
+  "scequiv": "0.1",
+  "region": ["東北", "関東", "甲信越", "北陸", "東海", "近畿", "中国", "四国", "九州", "北海道"],
+  "allergy": ["乳"]
+}
